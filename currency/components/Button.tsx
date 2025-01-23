@@ -5,12 +5,13 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 type CurrencyButtonProps = PropsWithChildren<{
   flag: string;
   name: string;
+  press: () => void;
 }>;
 
 const Button = (props: CurrencyButtonProps): JSX.Element => {
-  const { flag, name } = props;
+  const { flag, name, press } = props;
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={press}>
       <Text style={styles.text}>{`${flag}`}</Text>
       <Text style={styles.tag}>{`${name}`}</Text>
     </TouchableOpacity>
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    margin: 10,
   },
   text: {
     fontSize: 20,
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   tag: {
-    fontSize: 18,
+    fontSize: 14,
     color: "#2d3436",
     textAlign: "center",
     fontWeight: "bold",

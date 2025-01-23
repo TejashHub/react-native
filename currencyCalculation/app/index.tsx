@@ -28,7 +28,7 @@ const App = () => {
           style={styles.textInput}
           value={currency}
           onChangeText={setCurrency}
-          keyboardType="numeric" // Ensures only numeric input
+          keyboardType="numeric"
         />
       </View>
       <Text style={styles.resultText}>Your Current Value is: {result}</Text>
