@@ -12,14 +12,14 @@ const Icons = (props: IconProps): JSX.Element => {
   const { name } = props;
   switch (name) {
     case "circle":
-      return <Icon name="circle-thin" size={40} color="#F7CD2E" />;
+      return <Icon name="circle-thin" size={40} color="#3cde31" />;
       break;
     case "cross":
       return <Icon name="times" size={40} color="#F7CD2E" />;
       break;
 
     default:
-      return <Icon name="times" size={40} color="#F7CD2E" />;
+      return <Icon name="pencil" size={40} color="#ffffff" />;
   }
   return (
     <View>
