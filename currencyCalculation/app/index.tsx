@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView, TextInput } from "react-native";
 import React, { useState } from "react";
 import Button from "@/components/Button";
-import currencyByRupees from "../constants/constant";
+import currencyByRupees from "../constants/Constant";
 
 const App = () => {
   const [currency, setCurrency] = useState<string>("");
