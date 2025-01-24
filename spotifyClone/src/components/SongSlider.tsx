@@ -6,9 +6,6 @@ import { useProgress } from "react-native-track-player";
 const SongSlider = () => {
   const { position, duration } = useProgress();
 
-  console.log(`Your Position is: ${position}`);
-  console.log(`Your Duration is: ${duration}`);
-
   // Format time in MM:SS format
   const formatTime = (time: number): string =>
     new Date(time * 1000).toISOString().substring(14, 19);

@@ -9,7 +9,6 @@ type SongInfoProps = PropsWithChildren<{
 
 export const SongInfo = (props: SongInfoProps): JSX.Element => {
   const { track } = props;
-  console.log(track);
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>

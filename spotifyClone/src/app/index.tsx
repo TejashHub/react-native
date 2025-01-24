@@ -8,7 +8,7 @@ import {
 } from "../../services/musicPlayerService";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TrackPlayer from "react-native-track-player";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 const App = (): JSX.Element => {
   const [isPlayerReady, setIsPlayerReady] = useState(false);

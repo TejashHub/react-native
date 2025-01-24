@@ -23,10 +23,11 @@ const MusicPlayer = () => {
   const [track, setTrack] = useState<Track | null>();
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event) => {
-    if (event.type === Event.PlaybackActiveTrackChanged) {
-      const playingTrack = await TrackPlayer.getTrack(event.nextTrack);
-      setTrack(playingTrack);
-      console.log(playingTrack);
+    switch (event.type) {
+      case Event.PlaybackActiveTrackChanged:
+        const playingTrack = await TrackPlayer.getTrack(event.nextTrack);
+        setTrack(playingTrack);
+        break;
     }
   });
 

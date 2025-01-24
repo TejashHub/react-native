@@ -4,7 +4,6 @@ import TrackPlayer, {
   usePlaybackState,
   State,
 } from "react-native-track-player";
-import { PlaybackService } from "@/services/musicPlayerService";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const ControlCenter = () => {

@@ -27,12 +27,6 @@ export const setupTrack = async () => {
         Capability.SkipToNext,
       ],
     });
-    console.log(
-      "Player capabilities set:",
-      Capability.Play,
-      Capability.Pause,
-      Capability.Stop
-    );
   } finally {
     return isSetup;
   }
@@ -44,15 +38,19 @@ export const addTrack = async () => {
 };
 
 export const PlaybackService = async () => {
-  TrackPlayer.addEventListener(Event.RemotePlay, () => TrackPlayer.play());
+  TrackPlayer.addEventListener(Event.RemotePlay, () => {
+    TrackPlayer.play();
+  });
 
-  TrackPlayer.addEventListener(Event.RemotePause, () => TrackPlayer.pause());
+  TrackPlayer.addEventListener(Event.RemotePause, () => {
+    TrackPlayer.pause();
+  });
 
-  TrackPlayer.addEventListener(Event.RemoteNext, () =>
-    TrackPlayer.skipToNext()
-  );
+  TrackPlayer.addEventListener(Event.RemoteNext, () => {
+    TrackPlayer.skipToNext();
+  });
 
-  TrackPlayer.addEventListener(Event.RemotePrevious, () =>
-    TrackPlayer.skipToPrevious()
-  );
+  TrackPlayer.addEventListener(Event.RemotePrevious, () => {
+    TrackPlayer.skipToPrevious();
+  });
 };
