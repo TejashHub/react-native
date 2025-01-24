@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "navigatorApp",
-    "slug": "navigatorApp",
+    "name": "singerBox",
+    "slug": "singerBox",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
