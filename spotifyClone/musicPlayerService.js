@@ -1,19 +1,42 @@
-import TrackPlayer, { RepeatMode } from "react-native-track-player";
+import TrackPlayer, {
+  RepeatMode,
+  Capability,
+  Event,
+} from "react-native-track-player";
 import { playListData } from "./src/constants/Constant";
-
 export const setupPlayer = async () => {
-  let isSetup = false;
   try {
-    await TrackPlayer.getCurrentTrack();
-    isSetup = true;
+    const isSetup = await TrackPlayer.isServiceRunning();
+
+    if (!isSetup) {
+      await TrackPlayer.setupPlayer();
+      console.log("Player is set up");
+    }
+
+    await TrackPlayer.updateOptions({
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+        Capability.Stop,
+      ],
+      compactCapabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+      ],
+    });
+
+    await TrackPlayer.setRepeatMode(RepeatMode.Queue);
+
+    // Add tracks to the player
+    await TrackPlayer.add(playListData);
+    console.log("Tracks added");
   } catch (error) {
-    await TrackPlayer.setupPlayer();
-    isSetup = true;
-  } finally {
-    return isSetup;
+    console.error("Error setting up the player:", error);
   }
 };
-
 export const addTrack = async () => {
   await TrackPlayer.add(playListData);
   await TrackPlayer.setRepeatMode(RepeatMode.Queue);
@@ -32,7 +55,7 @@ export const playBackService = async () => {
     TrackPlayer.skipToNext();
   });
 
-  TrackPlayer.addEventListener(Event.RemoteNext, () => {
+  TrackPlayer.addEventListener(Event.RemotePrevious, () => {
     TrackPlayer.skipToPrevious();
   });
 };

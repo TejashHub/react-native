@@ -2,6 +2,7 @@ import TrackPlayer from "react-native-track-player";
 import { View, Text, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
 import type { PropsWithChildren } from "react";
+import MusicPlayer from "../screen/MusicPlayer";
 import {
   setupPlayer,
   addTrack,
@@ -32,11 +33,7 @@ const App = (): JSX.Element => {
     );
   }
 
-  return (
-    <View>
-      <Text>Music Player Sections</Text>
-    </View>
-  );
+  return <MusicPlayer />;
 };
 
 TrackPlayer.registerPlaybackService(() => playBackService);
