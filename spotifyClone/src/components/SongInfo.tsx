@@ -28,7 +28,7 @@ export const SongInfo = (props: SongInfoProps): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: "#1e1e1e", // Dark background to match a music player theme
+    backgroundColor: "#1e1e1e",
     borderRadius: 8,
     marginBottom: 16,
     shadowColor: "#000",

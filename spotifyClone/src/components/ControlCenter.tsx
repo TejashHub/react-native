@@ -4,12 +4,13 @@ import TrackPlayer, {
   usePlaybackState,
   State,
 } from "react-native-track-player";
+import { PlaybackService } from "@/services/musicPlayerService";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const ControlCenter = () => {
-  let playBackState = usePlaybackState();
+  const playbackState = usePlaybackState();
 
-  // Next button functionality
+  // Next button
   const skipToNext = async () => {
     try {
       await TrackPlayer.skipToNext();
@@ -18,7 +19,7 @@ const ControlCenter = () => {
     }
   };
 
-  // Previous button functionality
+  // Previous button
   const skipToPrevious = async () => {
     try {
       await TrackPlayer.skipToPrevious();
@@ -29,7 +30,7 @@ const ControlCenter = () => {
 
   // Play/Pause toggle
   const togglePlayBack = async (playback: State) => {
-    const currentTrack = await TrackPlayer.getCurrentTrack();
+    const currentTrack = await TrackPlayer.getActiveTrackIndex();
     if (currentTrack !== null) {
       if (playback === State.Paused || playback === State.Ready) {
         await TrackPlayer.play();
@@ -54,7 +55,7 @@ const ControlCenter = () => {
 
       {/* Play/Pause Button */}
       <Pressable
-        onPress={() => togglePlayBack(playBackState)}
+        onPress={() => togglePlayBack(playbackState)}
         style={({ pressed }) => [
           styles.playButton,
           pressed && styles.buttonPressed,
@@ -62,7 +63,7 @@ const ControlCenter = () => {
       >
         <Icon
           style={styles.icon}
-          name={playBackState === State.Playing ? "pause" : "play-arrow"}
+          name={playbackState === State.Playing ? "pause" : "play-arrow"}
           size={50}
         />
       </Pressable>

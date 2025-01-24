@@ -11,7 +11,6 @@ import TrackPlayer, {
   Event,
   Track,
   useTrackPlayerEvents,
-  Capability,
 } from "react-native-track-player";
 import { playListData } from "../constants/Constant";
 import { SongInfo } from "../components/SongInfo";

@@ -1,41 +1,53 @@
-import TrackPlayer from "react-native-track-player";
-import { View, Text, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
-import type { PropsWithChildren } from "react";
+import { ActivityIndicator } from "react-native";
 import MusicPlayer from "../screen/MusicPlayer";
 import {
-  setupPlayer,
+  setupTrack,
   addTrack,
-  playBackService,
-} from "../../musicPlayerService";
+  PlaybackService,
+} from "../../services/musicPlayerService";
 import { SafeAreaView } from "react-native-safe-area-context";
+import TrackPlayer from "react-native-track-player";
+import { View, Text, StyleSheet } from "react-native";
 
 const App = (): JSX.Element => {
-  const [isPlayReady, setIsPlayReady] = useState(false);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
 
-  const setUp = async () => {
-    let isSetup = await setupPlayer();
+  const setup = async () => {
+    let isSetup = await setupTrack();
     if (isSetup) {
       await addTrack();
+    } else {
+      console.log("TrackPlayer service is not running");
     }
-    setIsPlayReady(isSetup);
+    setIsPlayerReady(isSetup);
   };
 
   useEffect(() => {
-    setUp();
+    setup();
   }, []);
 
-  if (!isPlayReady) {
+  if (!isPlayerReady) {
     return (
-      <SafeAreaView>
-        <ActivityIndicator />
+      <SafeAreaView style={styles.container}>
+        <View>
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
       </SafeAreaView>
     );
   }
-
   return <MusicPlayer />;
 };
 
-TrackPlayer.registerPlaybackService(() => playBackService);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1e1e1e",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+TrackPlayer.registerPlaybackService(() => PlaybackService);
 
 export default App;

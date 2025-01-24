@@ -1,8 +1,9 @@
-import TrackPlayer from "react-native-track-player";
+import { Track } from "react-native-track-player";
+import { v4 as uuidv4 } from "uuid";
 
 export const playListData: Track[] = [
   {
-    id: 1,
+    id: uuidv4(),
     title: "Tum Hi Ho",
     artist: "Arijit Singh",
     album: "Aashiqui 2",
@@ -10,7 +11,7 @@ export const playListData: Track[] = [
     url: require("../assets/audios/001.mp3"),
   },
   {
-    id: 2,
+    id: uuidv4(),
     title: "Jai Ho",
     artist: "A.R. Rahman",
     album: "Slumdog Millionaire",
@@ -18,7 +19,7 @@ export const playListData: Track[] = [
     url: require("../assets/audios/002.mp3"),
   },
   {
-    id: 3,
+    id: uuidv4(),
     title: "Kesariya",
     artist: "Arijit Singh",
     album: "Brahmāstra",
@@ -26,7 +27,7 @@ export const playListData: Track[] = [
     url: require("../assets/audios/003.mp3"),
   },
   {
-    id: 4,
+    id: uuidv4(),
     title: "Tera Ban Jaunga",
     artist: "Akhil Sachdeva",
     album: "Kabir Singh",
@@ -34,7 +35,7 @@ export const playListData: Track[] = [
     url: require("../assets/audios/004.mp3"),
   },
   {
-    id: 5,
+    id: uuidv4(),
     title: "Lungi Dance",
     artist: "Yo Yo Honey Singh",
     album: "Chennai Express",
@@ -42,7 +43,7 @@ export const playListData: Track[] = [
     url: require("../assets/audios/005.mp3"),
   },
   {
-    id: 6,
+    id: uuidv4(),
     title: "Zara Sa",
     artist: "KK",
     album: "Jannat",
