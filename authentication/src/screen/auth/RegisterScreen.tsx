@@ -1,24 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
 } from "react-native";
+import Toast from "react-native-toast-message";
+import { AuthStackParamsList } from "@/src/routes/AuthStack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppwriteContext } from "@/src/appwrite/appwritecontext";
 
-const RegisterScreen = () => {
+type RegisterScreenProps = NativeStackScreenProps<
+  AuthStackParamsList,
+  "Register"
+>;
+
+const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
+  const { appwrite } = useContext(AppwriteContext);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const handleValidation = (): boolean => {
+    if (!name || !email || !password || !confirmPassword) {
+      Toast.show({
+        type: "error",
+        text1: "Please fill all fields.",
+      });
+      return false;
+    }
+    if (password !== confirmPassword) {
+      Toast.show({
+        type: "error",
+        text1: "Passwords do not match.",
+      });
+      return false;
+    }
+    return true;
+  };
 
   const handleRegister = () => {
-    if (!name || !email || !password) {
-      Alert.alert("Error", "Please fill all fields.");
-      return;
-    }
-    Alert.alert("Success", "Registration successful!");
+    if (!handleValidation()) return;
+    const user = { email, password, name };
+    appwrite
+      .createAccount(user)
+      .then(() => {
+        Toast.show({
+          type: "success",
+          text1: "Account created successfully!",
+        });
+        navigation.navigate("Login");
+      })
+      .catch((error) => {
+        Toast.show({
+          type: "error",
+          text1: "Registration failed",
+          text2: String(error.message || error),
+        });
+      });
   };
 
   return (
@@ -49,6 +90,14 @@ const RegisterScreen = () => {
         secureTextEntry
       />
 
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm your password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+      />
+
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
@@ -56,7 +105,7 @@ const RegisterScreen = () => {
       <View style={styles.footer}>
         <Text style={styles.footerText}>
           Already have an account?{" "}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={styles.linkText}>Login</Text>
           </TouchableOpacity>
         </Text>

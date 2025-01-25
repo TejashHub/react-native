@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -7,18 +7,50 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import Toast from "react-native-toast-message";
+import { AuthStackParamsList } from "@/src/routes/AuthStack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppwriteContext } from "@/src/appwrite/appwritecontext";
 
-const LoginScreen = () => {
+type LoginScreenProps = NativeStackScreenProps<AuthStackParamsList, "Login">;
+
+const LoginScreen = ({ navigation }: LoginScreenProps) => {
+  const { appwrite, setIsLoggedIn } = useContext(AppwriteContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleLogin = () => {
+  const handleValidation = (): boolean => {
     if (!email || !password) {
-      Alert.alert("Error", "Please enter both email and password.");
-      return;
+      Toast.show({
+        type: "error",
+        text1: "Please enter both email and password.",
+      });
+      return false;
     }
-    // Handle login logic (API call, etc.)
-    Alert.alert("Success", "Logged in successfully!");
+    return true;
+  };
+
+  const handleLogin = () => {
+    if (!handleValidation()) return;
+    const user = { email, password };
+    appwrite
+      .loginAccount(user)
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          Toast.show({
+            type: "success",
+            text1: "Account Login successfully!",
+          });
+        }
+      })
+      .catch((error) => {
+        Toast.show({
+          type: "error",
+          text1: "Login failed",
+          text2: String(error.message || error),
+        });
+      });
   };
 
   return (
@@ -49,7 +81,7 @@ const LoginScreen = () => {
       <View style={styles.footer}>
         <Text style={styles.footerText}>
           Don't have an account?{" "}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={styles.linkText}>Register</Text>
           </TouchableOpacity>
         </Text>

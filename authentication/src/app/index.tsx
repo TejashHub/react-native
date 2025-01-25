@@ -1,9 +1,7 @@
-import { Text, StyleSheet } from "react-native";
-import myFun from "../appwrite/service";
+import React from "react";
+import Router from "../routes/Router";
 const App = () => {
-  return <Text>Home Screen</Text>;
+  return <Router />;
 };
-
-const styles = StyleSheet.create({});
 
 export default App;

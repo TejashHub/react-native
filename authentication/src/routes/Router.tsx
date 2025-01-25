@@ -1,28 +1,29 @@
-import { View, Text } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import Loading from "../components/Loading";
 import { NavigationContainer } from "@react-navigation/native";
 import { AppwriteContext } from "../appwrite/appwritecontext";
+import Toast from "react-native-toast-message";
+import Loading from "../components/Loading";
+
+//Routes
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";
 
-const Router = () => {
+export const Router = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { appwrite, isLoggedIn, setIsLoggedIn } = useContext(AppwriteContext);
 
   useEffect(() => {
     appwrite
       .getCurrentUser()
-      .then((res) => {
+      .then((response) => {
         setIsLoading(false);
-        if (res) {
+        if (response) {
           setIsLoggedIn(true);
         }
       })
-      .catch((error) => {
+      .catch((_) => {
         setIsLoading(false);
         setIsLoggedIn(false);
-        console.log(error);
       });
   }, [appwrite, setIsLoggedIn]);
 
@@ -31,10 +32,9 @@ const Router = () => {
   }
 
   return (
-    <NavigationContainer>
+    <>
       {isLoggedIn ? <AppStack /> : <AuthStack />}
-    </NavigationContainer>
+      <Toast />
+    </>
   );
 };
-
-export { Router };

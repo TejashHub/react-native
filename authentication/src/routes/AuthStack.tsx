@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screen/auth/LoginScreen";
 import RegisterScreen from "../screen/auth/RegisterScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
 export type AuthStackParamsList = {
   Login: undefined;
@@ -17,6 +18,7 @@ const AuthStack = () => {
         headerTitleAlign: "center",
         headerBackVisible: false,
       }}
+      initialRouteName="Login"
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />

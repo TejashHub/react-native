@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
 import React from "react";
-import HomeScreen from "../screen/HomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "../screen/HomeScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
 export type AppStackParamsList = {
-  Home: undefined;
+  Home: undefined; // Define the route and its params (if any)
 };
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
@@ -14,11 +14,15 @@ const AppStack = () => {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerTitleAlign: "center",
-        headerBackVisible: false,
+        headerTitleAlign: "center", // Center the header title
+        headerBackVisible: false, // Hide the back button (if needed)
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: "Home" }} // Optional: Customize title
+      />
     </Stack.Navigator>
   );
 };

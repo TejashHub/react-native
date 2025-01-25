@@ -55,15 +55,10 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome, {userData.name}</Text>
       <Text style={styles.subtitle}>Email: {userData.email}</Text>
-
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Logout</Text>
-      </TouchableOpacity>
-
       <FAB
         title="Add"
         placement="right"
-        onPress={() => Toast.show({ type: "info", text1: "FAB Pressed" })}
+        onPress={handleLogout}
         color="#6200ea"
       />
     </View>
