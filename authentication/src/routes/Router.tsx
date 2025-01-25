@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { AppwriteContext } from "../appwrite/appwritecontext";
+import { AppwriteContext } from "../appwrite/AppWriteContext";
 import Toast from "react-native-toast-message";
 import Loading from "../components/Loading";
 
@@ -8,22 +7,28 @@ import Loading from "../components/Loading";
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";
 
-export const Router = () => {
+export const RouterApp = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { appwrite, isLoggedIn, setIsLoggedIn } = useContext(AppwriteContext);
-
+  console.log(AppwriteContext);
+  console.log(setIsLoggedIn);
   useEffect(() => {
     appwrite
       .getCurrentUser()
-      .then((response) => {
+      .then((res) => {
         setIsLoading(false);
-        if (response) {
+        if (res) {
+          console.log(res);
           setIsLoggedIn(true);
         }
       })
-      .catch((_) => {
+      .catch((error) => {
         setIsLoading(false);
         setIsLoggedIn(false);
+        Toast.show({
+          type: "error",
+          text1: String(error),
+        });
       });
   }, [appwrite, setIsLoggedIn]);
 

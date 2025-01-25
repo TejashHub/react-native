@@ -1,7 +1,12 @@
 import React from "react";
-import Router from "../routes/Router";
+import { RouterApp } from "../routes/Router";
+import { AppwriteProvider } from "../appwrite/AppWriteContext";
 const App = () => {
-  return <Router />;
+  return (
+    <AppwriteProvider>
+      <RouterApp />
+    </AppwriteProvider>
+  );
 };
 
 export default App;

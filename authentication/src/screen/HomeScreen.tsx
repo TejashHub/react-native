@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { FAB } from "@rneui/themed";
 import Toast from "react-native-toast-message";
-import { AppwriteContext } from "../appwrite/appwritecontext";
+import { AppwriteContext } from "../appwrite/AppWriteContext";
 
 type UserObj = {
   name: string;

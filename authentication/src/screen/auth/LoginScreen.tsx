@@ -10,7 +10,7 @@ import {
 import Toast from "react-native-toast-message";
 import { AuthStackParamsList } from "@/src/routes/AuthStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppwriteContext } from "@/src/appwrite/appwritecontext";
+import { AppwriteContext } from "@/src/appwrite/AppWriteContext";
 
 type LoginScreenProps = NativeStackScreenProps<AuthStackParamsList, "Login">;
 
@@ -18,6 +18,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const { appwrite, setIsLoggedIn } = useContext(AppwriteContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleValidation = (): boolean => {
     if (!email || !password) {
@@ -38,6 +39,8 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
+          console.log("admin");
+          console.log(res);
           Toast.show({
             type: "success",
             text1: "Account Login successfully!",
@@ -47,8 +50,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
       .catch((error) => {
         Toast.show({
           type: "error",
-          text1: "Login failed",
-          text2: String(error.message || error),
+          text1: String(error.message),
         });
       });
   };

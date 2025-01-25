@@ -9,7 +9,7 @@ import {
 import Toast from "react-native-toast-message";
 import { AuthStackParamsList } from "@/src/routes/AuthStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppwriteContext } from "@/src/appwrite/appwritecontext";
+import { AppwriteContext } from "@/src/appwrite/AppWriteContext";
 
 type RegisterScreenProps = NativeStackScreenProps<
   AuthStackParamsList,

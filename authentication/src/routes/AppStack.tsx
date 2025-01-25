@@ -1,10 +1,9 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screen/HomeScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export type AppStackParamsList = {
-  Home: undefined; // Define the route and its params (if any)
+  Home: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
@@ -14,14 +13,14 @@ const AppStack = () => {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerTitleAlign: "center", // Center the header title
-        headerBackVisible: false, // Hide the back button (if needed)
+        headerTitleAlign: "center",
+        headerBackVisible: false,
       }}
     >
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "Home" }} // Optional: Customize title
+        options={{ title: "Home" }}
       />
     </Stack.Navigator>
   );
