@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
-import AboutScreen from "../screens/AboutScreen";
 import ProductScreen from "../screens/ProductScreen";
 
 const Stack = createNativeStackNavigator();
@@ -11,12 +10,7 @@ const App = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "Welcome" }}
-      />
-      <Stack.Screen
-        name="About"
-        component={AboutScreen}
-        options={{ title: "User" }}
+        options={{ title: "Home" }}
       />
       <Stack.Screen
         name="Product"

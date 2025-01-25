@@ -9,5 +9,5 @@ interface Product {
   offer: number;
   rating: number;
   ratingCount: number;
-  tags: string;
+  tags: string[];
 }
